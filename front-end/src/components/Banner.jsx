@@ -79,6 +79,14 @@ const Banner = ({ className }) => {
       autoplaySpeed: 3000,
       adaptiveHeight: true,
       dotsClass: classes.button__bar,
+      responsive: [
+        {
+          breakpoint: 600,
+          settings: {
+            dots: false,
+          },
+        },
+      ],
     };
   }, []);
 
