@@ -55,8 +55,8 @@ export const BlogList = ({ data = [], filter, smUp }) => {
             date={blog?.date}
             image={blog?.coverImage}
             link={{
-              href: `/blogs/${blog?.slug}`,
-              /* as: `/blogs/${blog?.slug}`, */
+              href: '/blogs/[slug]',
+              as: `/blogs/${blog.slug}`,
             }}
             subtitle={blog?.subtitle}
             title={blog?.title}
