@@ -12,14 +12,14 @@ const BlogDetail = ({ blog }) => {
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
             <BlogHeader
-              author={blog.author}
-              coverImage={urlFor(blog.coverImage).height(600).url()}
-              date={blog.date}
-              subtitle={blog.subtitle}
-              title={blog.title}
+              author={blog?.author}
+              coverImage={urlFor(blog?.coverImage).height(600).url()}
+              date={blog?.date}
+              subtitle={blog?.subtitle}
+              title={blog?.title}
             />
             <hr />
-            <BlogContent content={blog.content} />
+            <BlogContent content={blog?.content} />
           </Col>
         </Row>
       </Container>
