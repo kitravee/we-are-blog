@@ -39,7 +39,7 @@ export async function getStaticPaths() {
   const blogs = await getAllBlogs();
   return {
     paths: blogs?.map((b) => ({ params: { slug: b.slug } })),
-    fallback: 'blocking',
+    fallback: 'true',
   };
 }
 
