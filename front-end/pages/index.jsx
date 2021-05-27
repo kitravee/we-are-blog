@@ -51,15 +51,15 @@ export const BlogList = ({ data = [], filter, smUp }) => {
       <Grid key={blog.slug} item md={4} sm={6} xs={12}>
         {smUp ? (
           <VerticalCard
-            author={blog.author}
-            date={blog.date}
-            image={blog.coverImage}
+            author={blog?.author}
+            date={blog?.date}
+            image={blog?.coverImage}
             link={{
               href: '/blogs/[slug]',
-              as: `/blogs/${blog.slug}`,
+              as: `/blogs/${blog?.slug}`,
             }}
-            subtitle={blog.subtitle}
-            title={blog.title}
+            subtitle={blog?.subtitle}
+            title={blog?.title}
           />
         ) : (
           <HorizontalCard
