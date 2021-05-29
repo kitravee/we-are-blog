@@ -13,13 +13,12 @@ import {
 import VerticalCard from 'src/components/VerticalCard';
 import Banner from 'src/components/Banner';
 import Container from '@material-ui/core/Container';
-import usePosition from 'src/hooks/usePosition';
 import Fab from '@material-ui/core/Fab';
 import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
-import Zoom from '@material-ui/core/Zoom';
 import Button from '@material-ui/core/Button';
 import HorizontalCard from 'src/components/HorizontalCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ScrollTop from 'src/components/ScrollTop';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -79,19 +78,16 @@ export const BlogList = ({ data = [], filter, smUp }) => {
   );
 };
 
-export default function Home({ blogs }) {
-  //! filter to support new feature
+export default function Home(props) {
+  const { blogs } = props;
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const theme = useTheme();
   const smUp = useMediaQuery(theme.breakpoints.up('sm'));
-  const [filter, setFilter] = useState({
+  const [filter] = useState({
     view: { list: 0 },
     date: { asc: 0 },
   });
-  const positionStore = usePosition();
-  const enableFabButton = positionStore.getElementY() < -740;
-
   const { data, size, setSize, hitEnd, isValidating } = useGetBlogsPages({
     filter,
   });
@@ -99,7 +95,6 @@ export default function Home({ blogs }) {
   return (
     <PageLayout className={classes.PageLayout}>
       <Banner />
-      {/* <Position /> */}
       <Container>
         <Grid container className={classes.bloglist} justify="center">
           <Grid container item xs={12}>
@@ -142,12 +137,16 @@ export default function Home({ blogs }) {
           </Grid>
         </Grid>
       </Container>
-
-      <Zoom unmountOnExit color="primary" in={enableFabButton} timeout={200}>
-        <Fab className={classes.fab} href="#banner">
+      <ScrollTop>
+        <Fab
+          aria-label="scroll back to top"
+          className={classes.fab}
+          color="secondary"
+          size="small"
+        >
           <ArrowUpwardRoundedIcon className={classes.extendedIcon} />
         </Fab>
-      </Zoom>
+      </ScrollTop>
     </PageLayout>
   );
 }
@@ -157,6 +156,7 @@ export default function Home({ blogs }) {
 //? It will create static page
 export async function getStaticProps({ preview = false }) {
   const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
+
   return {
     props: {
       blogs,
